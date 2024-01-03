@@ -1,0 +1,38 @@
+import unittest
+import tkinter as tk
+from tkinter import filedialog
+from unittest.mock import patch
+
+class TestLoadButton(unittest.TestCase):
+    def setUp(self):
+        # Create the main window
+        self.root = tk.Tk()
+        self.root.title("Load Button Test")
+
+        # Create and place entry fields or other form elements if needed
+
+        # Create the load button
+        self.load_button = tk.Button(self.root, text="Load", command=self.on_load)
+
+    def on_load(self):
+        # Add your load logic here
+        file_path = filedialog.askopenfilename()
+        return file_path
+
+    @patch('tkinter.filedialog.askopenfilename', return_value='/path/to/your/file.txt')
+    def test_load_button_click(self, mock_file_dialog):
+        # Simulate a click on the load button
+        result = self.load_button.invoke()
+
+        # Assert that the file dialog is called
+        mock_file_dialog.assert_called_once()
+
+        # Assert that the result from the load logic matches the expected file path
+        self.assertEqual(result, '/path/to/your/file.txt')
+
+    def tearDown(self):
+        # Destroy the main window after the test is complete
+        self.root.destroy()
+
+if __name__ == '__main__':
+    unittest.main()
