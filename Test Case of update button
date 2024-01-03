@@ -1,0 +1,32 @@
+import unittest
+import tkinter as tk
+from tkinter import messagebox
+
+class TestUpdateButton(unittest.TestCase):
+    def setUp(self):
+        # Create the main window
+        self.root = tk.Tk()
+        self.root.title("Update Button Test")
+
+        # Create and place entry fields or other form elements if needed
+
+        # Create the update button
+        self.update_button = tk.Button(self.root, text="Update", command=self.on_update)
+
+    def on_update(self):
+        # Add your update logic here
+        messagebox.showinfo("Update", "Data updated successfully!")
+
+    def test_update_button_click(self):
+        # Simulate a click on the update button
+        self.update_button.invoke()
+
+        # Assert that the messagebox indicating successful update is displayed
+        self.assertTrue(tk.Toplevel.winfo_exists(messagebox._show("info", "Update", "Data updated successfully!")))
+
+    def tearDown(self):
+        # Destroy the main window after the test is complete
+        self.root.destroy()
+
+if __name__ == '__main__':
+    unittest.main()
