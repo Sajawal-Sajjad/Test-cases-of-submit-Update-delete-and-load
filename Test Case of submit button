@@ -1,0 +1,32 @@
+import unittest
+import tkinter as tk
+from tkinter import messagebox
+
+class TestSubmitButton(unittest.TestCase):
+    def setUp(self):
+        # Create the main window
+        self.root = tk.Tk()
+        self.root.title("Submit Button Test")
+
+        # Create and place entry fields or other form elements if needed
+
+        # Create the submit button
+        self.submit_button = tk.Button(self.root, text="Submit", command=self.on_submit)
+
+    def on_submit(self):
+        # Add your form submission logic here
+        messagebox.showinfo("Submission", "Form submitted successfully!")
+
+    def test_submit_button_click(self):
+        # Simulate a click on the submit button
+        self.submit_button.invoke()
+
+        # Assert that the messagebox indicating successful submission is displayed
+        self.assertTrue(tk.Toplevel.winfo_exists(messagebox._show("info", "Submission", "Form submitted successfully!")))
+
+    def tearDown(self):
+        # Destroy the main window after the test is complete
+        self.root.destroy()
+
+if __name__ == '__main__':
+    unittest.main()
