@@ -1,0 +1,32 @@
+import unittest
+import tkinter as tk
+from tkinter import messagebox
+
+class TestDeleteButton(unittest.TestCase):
+    def setUp(self):
+        # Create the main window
+        self.root = tk.Tk()
+        self.root.title("Delete Button Test")
+
+        # Create and place entry fields or other form elements if needed
+
+        # Create the delete button
+        self.delete_button = tk.Button(self.root, text="Delete", command=self.on_delete)
+
+    def on_delete(self):
+        # Add your delete logic here
+        messagebox.showinfo("Delete", "Data deleted successfully!")
+
+    def test_delete_button_click(self):
+        # Simulate a click on the delete button
+        self.delete_button.invoke()
+
+        # Assert that the messagebox indicating successful deletion is displayed
+        self.assertTrue(tk.Toplevel.winfo_exists(messagebox._show("info", "Delete", "Data deleted successfully!")))
+
+    def tearDown(self):
+        # Destroy the main window after the test is complete
+        self.root.destroy()
+
+if __name__ == '__main__':
+    unittest.main()
